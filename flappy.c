@@ -181,8 +181,7 @@ int main()
 			pipeCounter = col/2;
 		}
 		
-		isScore++;		
-		
+		isScore++;				
 		pipeCounter--;	
 		
 		refresh();
@@ -237,12 +236,12 @@ void drawPipe(int begin, int end, int pipeCol, int row)
 	int i;
 	
 	for(i=2; i < row; i++)
-		{
-			if(i < begin)
-				mvprintw(i, pipeCol-3, "###");
-			if(i > end)
-				mvprintw(i, pipeCol-3, "###");
-		}
+	{
+		if(i < begin)
+			mvprintw(i, pipeCol-3, "###");
+		if(i > end)
+			mvprintw(i, pipeCol-3, "###");
+	}
 }
 
 void drawStarting(int row, int col)
@@ -293,7 +292,4 @@ void getNewPipeValue(int *crackStart, int *crackFinish, int row)
 {
 	*crackStart = rand() % row/2+3;
 	*crackFinish = *crackStart + CRACK_SIZE;
-
-
-
 }
