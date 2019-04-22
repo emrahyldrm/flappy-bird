@@ -6,4 +6,4 @@ install ncurses lib before compiling
 install: sudo apt-get install ncurses-dev
 compile: gcc -o flappy main.c -lncurses
 run    : ./flappy
-"""
+ ```
