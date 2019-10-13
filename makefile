@@ -1,4 +1,4 @@
-flappybird : flappy.c
+flappybird : flappybird.c
 	gcc -o $@ $^ -lncurses -O3
 
 clean:
