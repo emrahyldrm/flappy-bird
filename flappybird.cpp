@@ -86,7 +86,7 @@ int main() {
 	while (!isOver) {
 		clear();
 
-		mvaddch(birdRow, birdCol, bird | A_BOLD | COLOR_PAIR(2));
+		mvaddch(birdRow, birdCol, bird | COLOR_PAIR(2));
 
 		if (score % 8 == 0) {
 			mvprintw(1, col / 2 - 20, "SCORE : %d", score / 8);
