@@ -56,7 +56,8 @@ int main() {
 	init_pair(3, COLOR_YELLOW, COLOR_YELLOW);  // UNDERGROUND COLORS
 	init_pair(4, COLOR_BLACK, COLOR_WHITE);	// LOGO COLORS
 	init_pair(5, COLOR_WHITE, COLOR_RED);	  // GAME OVER COLORS
-	init_pair(6, COLOR_WHITE, COLOR_GREEN);	// GET READY COLORS
+	init_pair(6, COLOR_WHITE,
+			  COLOR_GREEN);  // GET READY AND GROUND BORDER COLORS
 
 	getmaxyx(stdscr, row, col);
 
@@ -111,9 +112,9 @@ int main() {
 			mvprintw(row - 1, i, "#");
 			mvprintw(row - 2, i, "#");
 			attroff(COLOR_PAIR(3));
-			attron(COLOR_PAIR(1));
-			mvprintw(row - 3, i, "#");
-			attroff(COLOR_PAIR(1));
+			attron(COLOR_PAIR(6));
+			mvprintw(row - 3, i, "/");
+			attroff(COLOR_PAIR(6));
 			// mvprintw(2, i, "#");
 		}
 
