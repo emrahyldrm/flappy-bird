@@ -271,7 +271,7 @@ int controlCollision(int pipeCol, int birdCol, int birdRow, int crackStart,
 void drawPipe(int begin, int end, int pipeCol, int row) {
 	for (int i = 2; i < row - 3; i++) {
 		if (i < begin) {
-			if (i == begin - 1) {
+			if (i == begin - 1 || i == begin - 2) {
 				mvprintw(i, pipeCol - 9, " ######## ");
 			} else {
 				//                       9876543210
@@ -279,7 +279,7 @@ void drawPipe(int begin, int end, int pipeCol, int row) {
 			}
 		}
 		if (i > end) {
-			if (i == end + 1) {
+			if (i == end + 1 || i == end + 2) {
 				mvprintw(i, pipeCol - 9, " ######## ");
 			} else {
 				mvprintw(i, pipeCol - 8, "########");
