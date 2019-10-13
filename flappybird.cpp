@@ -58,6 +58,7 @@ int main() {
 	init_pair(5, COLOR_WHITE, COLOR_RED);	  // GAME OVER COLORS
 	init_pair(6, COLOR_WHITE,
 			  COLOR_GREEN);  // GET READY AND GROUND BORDER COLORS
+	init_pair(7, COLOR_BLACK, COLOR_GREEN);  // PIPE BORDER COLORS
 
 	getmaxyx(stdscr, row, col);
 
@@ -196,7 +197,7 @@ int main() {
 	| |_| | (_| | | | | | |  __/ | |_| |\ V /  __/ |
 	 \____|\__,_|_| |_| |_|\___|  \___/  \_/ \___|_|
 	*/
-	attron(COLOR_PAIR(5));
+	attron(A_BOLD | COLOR_PAIR(5));
 	mvprintw(row / 2 - 10, (col - 51) / 2,
 			 "  ____                         ___                 ");
 	mvprintw(row / 2 - 9, (col - 51) / 2,
@@ -207,7 +208,7 @@ int main() {
 			 "| |_| | (_| | | | | | |  __/ | |_| |\\ V /  __/ |   ");
 	mvprintw(row / 2 - 6, (col - 51) / 2,
 			 " \\____|\\__,_|_| |_| |_|\\___|  \\___/  \\_/ \\___|_|   ");
-	attroff(COLOR_PAIR(5));
+	attroff(A_BOLD | COLOR_PAIR(5));
 	mvprintw(row / 2 - 1, col / 2 - 20, "SCORE : %d", score / 8);
 	mvprintw(row / 2 - 2, col / 2 - 20, "%s", playerName);
 	mvprintw(row / 2 - 2, col / 2 + 10, "%s", bestPlayerName);
@@ -231,7 +232,7 @@ void writeInfo(int row, int col) {
 	|_|   |_|\__,_| .__/| .__/ \__, |____/|_|_|  \__,_|
 	              |_|   |_|    |___/
 	*/
-	attron(COLOR_PAIR(4));
+	attron(A_BOLD | COLOR_PAIR(4));
 	mvprintw(row / 2 - 10, (col - 50) / 2,
 			 " _____ _                         ____  _         _ ");
 	mvprintw(row / 2 - 9, (col - 50) / 2,
@@ -244,7 +245,7 @@ void writeInfo(int row, int col) {
 			 "|_|   |_|\\__,_| .__/| .__/ \\__, |____/|_|_|  \\__,_|");
 	mvprintw(row / 2 - 5, (col - 50) / 2,
 			 "              |_|   |_|    |___/                   ");
-	attroff(COLOR_PAIR(4));
+	attroff(A_BOLD | COLOR_PAIR(4));
 	mvprintw(row / 2 - 1, (col - 62) / 2,
 			 "If you touch the ground or any of the pipes, game will be over");
 	mvprintw(row / 2 + 1, (col - 27) / 2, "Use \"SPACE BAR\" for playing");
@@ -271,11 +272,27 @@ int controlCollision(int pipeCol, int birdCol, int birdRow, int crackStart,
 void drawPipe(int begin, int end, int pipeCol, int row) {
 	for (int i = 2; i < row - 3; i++) {
 		if (i < begin) {
-			//                       9876543210
-			mvprintw(i, pipeCol - 8, "########");
+			if (i == begin - 1) {
+				//                       9876543210
+				attroff(COLOR_PAIR(1));
+				attron(COLOR_PAIR(7));
+				mvprintw(i, pipeCol - 8, "--------");
+				attroff(COLOR_PAIR(7));
+				attron(COLOR_PAIR(1));
+			} else {
+				mvprintw(i, pipeCol - 8, "########");
+			}
 		}
 		if (i > end) {
-			mvprintw(i, pipeCol - 8, "########");
+			if (i == end + 1) {
+				attroff(COLOR_PAIR(1));
+				attron(COLOR_PAIR(7));
+				mvprintw(i, pipeCol - 8, "--------");
+				attroff(COLOR_PAIR(7));
+				attron(COLOR_PAIR(1));
+			} else {
+				mvprintw(i, pipeCol - 8, "########");
+			}
 		}
 	}
 }
@@ -290,7 +307,7 @@ void drawStarting(int row, int col) {
 	 \____|\___|\__| |_| \_\___|\__,_|\__,_|\__, (_)
 	                                        |___/
 	*/
-	attron(COLOR_PAIR(6));
+	attron(A_BOLD | COLOR_PAIR(6));
 	mvprintw(row / 2 - 10, (col - 48) / 2,
 			 "  ____      _     ____                _       _ ");
 	mvprintw(row / 2 - 9, (col - 48) / 2,
@@ -303,7 +320,7 @@ void drawStarting(int row, int col) {
 			 " \\____|\\___|\\__| |_| \\_\\___|\\__,_|\\__,_|\\__, (_)");
 	mvprintw(row / 2 - 5, (col - 48) / 2,
 			 "                                        |___/   ");
-	attroff(COLOR_PAIR(6));
+	attroff(A_BOLD | COLOR_PAIR(6));
 	mvprintw(row / 2 + 1, (col - 5) / 2 + 3, "]");
 	mvprintw(row / 2 + 1, (col - 5) / 2 - 1, "[");
 
