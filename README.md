@@ -1,4 +1,4 @@
-FlappyBird written in C for BASH.
+FlappyBird written in C++ for BASH.
 
 You should install ncurses lib before compiling:
 ```bash
