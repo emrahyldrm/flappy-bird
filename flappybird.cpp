@@ -1,7 +1,11 @@
 #include <ncurses.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 #include <unistd.h>
+
+#include <iostream>
+using namespace std;
 
 #define GET_NAME(playerName) getstr(playerName)
 #define FILE_NAME "bestScore.bin"
@@ -11,8 +15,6 @@
 #define WAIT_BIG 140000
 #define WAIT_LIT 110000
 #define DOUBLE 2
-#define TRUE 1
-#define FALSE 0
 
 void writeInfo(int row, int col);
 void drawPipe(int begin, int end, int pipeCol, int row);
@@ -25,12 +27,13 @@ int controlCollision(int pipeCol, int birdCol, int birdRow, int crackStart,
 					 int crackFinish);
 
 int main() {
+	srand(time(NULL));
 	int score = 0, isScore = 0, bestScore = 0;
 	int isOver = 0, flag = -1;
 	;
 	int crackStart1, crackFinish1, crackStart2, crackFinish2;
 	int row, col, birdRow, birdCol, pipeCol1, pipeCol2;
-	int i, j, pipeCounter, collision;
+	int pipeCounter, collision;
 	int wait = WAIT_LIT;
 	int command;
 	char playerName[NAME_SIZE], bestPlayerName[NAME_SIZE];
@@ -40,11 +43,15 @@ int main() {
 
 	initscr();
 	curs_set(0);
-	keypad(stdscr, TRUE);
+	keypad(stdscr, true);
 	start_color();
-	assume_default_colors(COLOR_BLACK,
-						  COLOR_CYAN);		 // FOREGROUND AND BACKGROUND COLORS
-	init_pair(1, COLOR_GREEN, COLOR_GREEN);  // PIPE COLORS
+	// RANDOM FOREGROUND AND BACKGROUND COLORS
+	if (rand() % 2 == 0) {
+		assume_default_colors(COLOR_BLACK, COLOR_CYAN);
+	} else {
+		assume_default_colors(COLOR_WHITE, COLOR_BLACK);
+	}
+	init_pair(1, COLOR_GREEN, COLOR_GREEN);	// PIPE COLORS
 	init_pair(2, COLOR_BLACK, COLOR_YELLOW);   // BIRD COLORS
 	init_pair(3, COLOR_YELLOW, COLOR_YELLOW);  // UNDERGROUND COLORS
 	init_pair(4, COLOR_BLACK, COLOR_WHITE);	// LOGO COLORS
@@ -64,7 +71,7 @@ int main() {
 
 	refresh();
 	noecho();
-	timeout(TRUE);
+	timeout(true);
 
 	birdRow = row / 2;
 	birdCol = col / 4;
@@ -99,7 +106,7 @@ int main() {
 		}
 		pipeCol1--;
 		attroff(COLOR_PAIR(1));
-		for (i = 0; i < col; i++) {
+		for (int i = 0; i < col; i++) {
 			attron(COLOR_PAIR(3));
 			mvprintw(row - 1, i, "#");
 			mvprintw(row - 2, i, "#");
@@ -130,7 +137,7 @@ int main() {
 									 crackFinish1);
 		if (collision) {
 			if (collision == DOUBLE) {
-				isOver = TRUE;
+				isOver = true;
 			} else if (isScore) {
 				score++;
 				if (score / 8 > bestScore) {
@@ -144,7 +151,7 @@ int main() {
 									 crackFinish2);
 		if (collision) {
 			if (collision == DOUBLE) {
-				isOver = TRUE;
+				isOver = true;
 			} else if (isScore) {
 				score++;
 				if (score / 8 > bestScore) {
@@ -156,7 +163,7 @@ int main() {
 
 		if (birdRow > row - 4 /*|| birdRow == 2*/) {
 			// TOUCH THE GROUND
-			isOver = TRUE;
+			isOver = true;
 		}
 
 		if (pipeCol1 == 0) {
@@ -245,7 +252,7 @@ void writeInfo(int row, int col) {
 
 int controlCollision(int pipeCol, int birdCol, int birdRow, int crackStart,
 					 int crackFinish) {
-	int status = FALSE;
+	int status = false;
 
 	if (pipeCol - 8 == birdCol || pipeCol - 7 == birdCol ||
 		pipeCol - 6 == birdCol || pipeCol - 5 == birdCol ||
@@ -261,9 +268,7 @@ int controlCollision(int pipeCol, int birdCol, int birdRow, int crackStart,
 }
 
 void drawPipe(int begin, int end, int pipeCol, int row) {
-	int i;
-
-	for (i = 2; i < row - 3; i++) {
+	for (int i = 2; i < row - 3; i++) {
 		if (i < begin) {
 			//                       9876543210
 			mvprintw(i, pipeCol - 8, "########");
@@ -275,7 +280,6 @@ void drawPipe(int begin, int end, int pipeCol, int row) {
 }
 
 void drawStarting(int row, int col) {
-	int i, j;
 	clear();
 	/*
 	  ____      _     ____                _       _
@@ -302,8 +306,8 @@ void drawStarting(int row, int col) {
 	mvprintw(row / 2 + 1, (col - 5) / 2 + 3, "]");
 	mvprintw(row / 2 + 1, (col - 5) / 2 - 1, "[");
 
-	for (j = 1; j < 4; j++) {
-		for (i = 0; i < j; i++) {
+	for (int j = 1; j < 4; j++) {
+		for (int i = 0; i < j; i++) {
 			mvprintw(row / 2 + 1, (col - 5) / 2 - 1 + j, "#");
 			refresh();
 		}
