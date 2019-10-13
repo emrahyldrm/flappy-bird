@@ -2,5 +2,5 @@ FlappyBird written in C for BASH.
 
 You should install ncurses lib before compiling:
 ```bash
-sudo apt install ncurses-dev
+sudo apt install ncurses*
 ```
