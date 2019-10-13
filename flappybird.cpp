@@ -45,14 +45,23 @@ int main() {
 	curs_set(0);
 	keypad(stdscr, true);
 	start_color();
+	int mode = rand() % 2;
 	// RANDOM FOREGROUND AND BACKGROUND COLORS
-	if (rand() % 2 == 0) {
+	if (mode == 0) {
 		assume_default_colors(COLOR_BLACK, COLOR_CYAN);  // DAY MODE
 	} else {
 		assume_default_colors(COLOR_WHITE, COLOR_BLACK);  // NIGHT MODE
 	}
-	init_pair(1, COLOR_GREEN, COLOR_GREEN);	// PIPE COLORS
-	init_pair(2, COLOR_BLACK, COLOR_YELLOW);   // BIRD COLORS
+	init_pair(1, COLOR_GREEN, COLOR_GREEN);  // PIPE COLORS
+	int birdType = rand() % 3;
+	// RANDOM BIRD COLORS
+	if (birdType == 0) {
+		init_pair(2, COLOR_BLACK, COLOR_YELLOW);
+	} else if (birdType == 1) {
+		init_pair(2, COLOR_BLACK, COLOR_RED);
+	} else if (birdType == 2) {
+		init_pair(2, COLOR_BLACK, COLOR_BLUE);
+	}
 	init_pair(3, COLOR_YELLOW, COLOR_YELLOW);  // UNDERGROUND COLORS
 	init_pair(4, COLOR_BLACK, COLOR_WHITE);	// LOGO COLORS
 	init_pair(5, COLOR_WHITE, COLOR_RED);	  // GAME OVER COLORS
@@ -95,8 +104,6 @@ int main() {
 		mvprintw(0, col / 2 - 20, "%s", playerName);
 		mvprintw(0, col / 2 + 13, "%s", bestPlayerName);
 		mvprintw(1, col / 2 + 13, "BEST : %d", bestScore);
-		mvprintw(1, col / 2 - 2, "SPEED : %dx",
-				 WAIT_LIT / 10000 - wait / 10000 + 1);
 
 		attron(COLOR_PAIR(1));
 		drawPipe(crackStart1, crackFinish1, pipeCol1, row);
