@@ -47,9 +47,9 @@ int main() {
 	start_color();
 	// RANDOM FOREGROUND AND BACKGROUND COLORS
 	if (rand() % 2 == 0) {
-		assume_default_colors(COLOR_BLACK, COLOR_CYAN);
+		assume_default_colors(COLOR_BLACK, COLOR_CYAN);  // DAY MODE
 	} else {
-		assume_default_colors(COLOR_WHITE, COLOR_BLACK);
+		assume_default_colors(COLOR_WHITE, COLOR_BLACK);  // NIGHT MODE
 	}
 	init_pair(1, COLOR_GREEN, COLOR_GREEN);	// PIPE COLORS
 	init_pair(2, COLOR_BLACK, COLOR_YELLOW);   // BIRD COLORS
