@@ -11,7 +11,7 @@ using namespace std;
 #define FILE_NAME "bestScore.bin"
 #define NAME_SIZE 100
 #define JUMP 4
-#define CRACK_SIZE 5
+#define CRACK_SIZE 3
 #define WAIT_BIG 140000
 #define WAIT_LIT 110000
 #define DOUBLE 2
