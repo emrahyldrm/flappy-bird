@@ -254,17 +254,17 @@ void writeInfo(int row, int col) {
 				  |_|   |_|    |___/
 	*/
 	attron(A_BOLD | COLOR_PAIR(4));
-	mvprintw(row / 2 - 14, (col - 50) / 2,
-			 " _____ _                         ____  _         _ ");
-	mvprintw(row / 2 - 13, (col - 50) / 2,
-			 "|  ___| | __ _ _ __  _ __  _   _| __ )(_)_ __ __| |");
-	mvprintw(row / 2 - 12, (col - 50) / 2,
-			 "| |_  | |/ _` | '_ \\| '_ \\| | | |  _ \\| | '__/ _` |");
-	mvprintw(row / 2 - 11, (col - 50) / 2,
-			 "|  _| | | (_| | |_) | |_) | |_| | |_) | | | | (_| |");
 	mvprintw(row / 2 - 10, (col - 50) / 2,
-			 "|_|   |_|\\__,_| .__/| .__/ \\__, |____/|_|_|  \\__,_|");
+			 " _____ _                         ____  _         _ ");
 	mvprintw(row / 2 - 9, (col - 50) / 2,
+			 "|  ___| | __ _ _ __  _ __  _   _| __ )(_)_ __ __| |");
+	mvprintw(row / 2 - 8, (col - 50) / 2,
+			 "| |_  | |/ _` | '_ \\| '_ \\| | | |  _ \\| | '__/ _` |");
+	mvprintw(row / 2 - 7, (col - 50) / 2,
+			 "|  _| | | (_| | |_) | |_) | |_| | |_) | | | | (_| |");
+	mvprintw(row / 2 - 6, (col - 50) / 2,
+			 "|_|   |_|\\__,_| .__/| .__/ \\__, |____/|_|_|  \\__,_|");
+	mvprintw(row / 2 - 5, (col - 50) / 2,
 			 "              |_|   |_|    |___/                   ");
 	attroff(A_BOLD | COLOR_PAIR(4));
 	/*
@@ -282,22 +282,20 @@ void writeInfo(int row, int col) {
 			  [][][][][]
 	*/
 	attron(COLOR_PAIR(7));
-	mvprintw(row / 2 - 6, (col - 34) / 2, "            [][][][][][]          ");
-	mvprintw(row / 2 - 5, (col - 34) / 2, "        [][]      []    []        ");
-	mvprintw(row / 2 - 4, (col - 34) / 2, "      []        []        []      ");
-	mvprintw(row / 2 - 3, (col - 34) / 2, "  [][][][]      []      []  []    ");
-	mvprintw(row / 2 - 2, (col - 34) / 2, "[]        []    []      []  []    ");
-	mvprintw(row / 2 - 1, (col - 34) / 2, "[]          []    []        []    ");
-	mvprintw(row / 2 - 0, (col - 34) / 2, "[]          []      [][][][][][]  ");
-	mvprintw(row / 2 + 1, (col - 34) / 2, "  []      []      []            []");
-	mvprintw(row / 2 + 2, (col - 34) / 2, "    [][][]      []  [][][][][][]  ");
-	mvprintw(row / 2 + 3, (col - 34) / 2, "    []            []          []  ");
-	mvprintw(row / 2 + 4, (col - 34) / 2, "      [][]          [][][][][]    ");
-	mvprintw(row / 2 + 5, (col - 34) / 2, "          [][][][][]              ");
+	mvprintw(row / 2 - 3, (col - 34) / 2, "            [][][][][][]          ");
+	mvprintw(row / 2 - 2, (col - 34) / 2, "        [][]      []    []        ");
+	mvprintw(row / 2 - 1, (col - 34) / 2, "      []        []        []      ");
+	mvprintw(row / 2 + 0, (col - 34) / 2, "  [][][][]      []      []  []    ");
+	mvprintw(row / 2 + 1, (col - 34) / 2, "[]        []    []      []  []    ");
+	mvprintw(row / 2 + 2, (col - 34) / 2, "[]          []    []        []    ");
+	mvprintw(row / 2 + 3, (col - 34) / 2, "[]          []      [][][][][][]  ");
+	mvprintw(row / 2 + 4, (col - 34) / 2, "  []      []      []            []");
+	mvprintw(row / 2 + 5, (col - 34) / 2, "    [][][]      []  [][][][][][]  ");
+	mvprintw(row / 2 + 6, (col - 34) / 2, "    []            []          []  ");
+	mvprintw(row / 2 + 7, (col - 34) / 2, "      [][]          [][][][][]    ");
+	mvprintw(row / 2 + 8, (col - 34) / 2, "          [][][][][]              ");
 	attroff(COLOR_PAIR(7));
-	mvprintw(row / 2 + 8, (col - 34) / 2,
-			 "Press \"SPACE BAR\" to flap the bird");
-	mvprintw(row / 2 + 12, (col - 24) / 2, "Before, Enter Your Name: ");
+	mvprintw(row / 2 + 10, (col - 24) / 2, "Enter Your Name: ");
 }
 
 int controlCollision(int pipeCol, int birdCol, int birdRow, int crackStart,
@@ -367,6 +365,8 @@ void drawStarting(int row, int col) {
 	attroff(A_BOLD | COLOR_PAIR(6));
 	mvprintw(row / 2 + 1, (col - 5) / 2 + 3, "]");
 	mvprintw(row / 2 + 1, (col - 5) / 2 - 1, "[");
+	mvprintw(row / 2 + 3, (col - 34) / 2,
+			 "Press \"SPACE BAR\" to flap the bird");
 
 	for (int j = 1; j < 4; j++) {
 		for (int i = 0; i < j; i++) {
