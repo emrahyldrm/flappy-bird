@@ -67,6 +67,7 @@ int main() {
 	init_pair(5, COLOR_WHITE, COLOR_RED);	  // GAME OVER COLORS
 	init_pair(6, COLOR_WHITE,
 			  COLOR_GREEN);  // GET READY AND GROUND BORDER COLORS
+	init_pair(7, COLOR_BLACK, COLOR_GREEN);  // PIPE BORDER COLORS
 
 	getmaxyx(stdscr, row, col);
 
@@ -280,14 +281,26 @@ void drawPipe(int begin, int end, int pipeCol, int row) {
 		if (i < begin) {
 			if (i == begin - 1 || i == begin - 2) {
 				mvprintw(i, pipeCol - 9, " ######## ");
-			} else {
+			} else if (i == begin - 3) {
+				attroff(COLOR_PAIR(1));
+				attron(COLOR_PAIR(7));
+				mvprintw(i, pipeCol - 8, "________");
+				attroff(COLOR_PAIR(7));
+				attron(COLOR_PAIR(1));
+			} else{
 				//                       9876543210
 				mvprintw(i, pipeCol - 8, "########");
 			}
 		}
 		if (i > end) {
-			if (i == end + 1 || i == end + 2) {
+			if (i == end + 1) {
 				mvprintw(i, pipeCol - 9, " ######## ");
+			} else if (i == end + 2) {
+				attroff(COLOR_PAIR(1));
+				attron(COLOR_PAIR(7));
+				mvprintw(i, pipeCol - 9, "__________");
+				attroff(COLOR_PAIR(7));
+				attron(COLOR_PAIR(1));
 			} else {
 				mvprintw(i, pipeCol - 8, "########");
 			}
