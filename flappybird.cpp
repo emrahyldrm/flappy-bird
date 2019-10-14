@@ -269,8 +269,8 @@ void writeInfo(int row, int col) {
 	attroff(A_BOLD | COLOR_PAIR(4));
 	/*
 	            [][][][][][]          
-                [][]      []    []        
-              []        []        []      
+            [][]      []    []        
+          []        []        []      
 	  [][][][]      []      []  []    
 	[]        []    []      []  []    
 	[]          []    []        []    
@@ -307,8 +307,6 @@ void writeInfo(int row, int col) {
 	mvprintw(row / 2 + 4, (col - 34) / 2,
 			 "          [][][][][]              ");
 	attroff(COLOR_PAIR(7));
-	mvprintw(row / 2 + 6, (col - 62) / 2,
-			 "If you touch the ground or any of the pipes, game will be over");
 	mvprintw(row / 2 + 8, (col - 27) / 2, "Use \"SPACE BAR\" for playing");
 	mvprintw(row / 2 + 12, (col - 27) / 2, "Before, Enter Your Name >> ");
 }
