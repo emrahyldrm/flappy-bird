@@ -298,7 +298,7 @@ void drawPipe(int begin, int end, int pipeCol, int row) {
 			} else if (i == end + 2) {
 				attroff(COLOR_PAIR(1));
 				attron(COLOR_PAIR(7));
-				mvprintw(i, pipeCol - 9, "__________");
+				mvprintw(i, pipeCol - 9, " ________ ");
 				attroff(COLOR_PAIR(7));
 				attron(COLOR_PAIR(1));
 			} else {
