@@ -52,22 +52,36 @@ int main() {
 	} else {
 		assume_default_colors(COLOR_WHITE, COLOR_BLACK);  // NIGHT MODE
 	}
-	init_pair(1, COLOR_GREEN, COLOR_GREEN);  // PIPE COLORS
+	init_pair(1, COLOR_BLACK, COLOR_GREEN);  // PIPE COLORS
 	int birdType = rand() % 3;
 	// RANDOM BIRD COLORS
 	if (birdType == 0) {
 		init_pair(2, COLOR_BLACK, COLOR_YELLOW);
+		if (mode == 0){
+			init_pair(7, COLOR_YELLOW, COLOR_CYAN);
+		} else {
+			init_pair(7, COLOR_YELLOW, COLOR_BLACK);
+		}
 	} else if (birdType == 1) {
 		init_pair(2, COLOR_BLACK, COLOR_RED);
+		if (mode == 0){
+			init_pair(7, COLOR_RED, COLOR_CYAN);
+		} else {
+			init_pair(7, COLOR_RED, COLOR_BLACK);
+		}
 	} else if (birdType == 2) {
 		init_pair(2, COLOR_BLACK, COLOR_BLUE);
+		if (mode == 0){
+			init_pair(7, COLOR_BLUE, COLOR_CYAN);
+		} else {
+			init_pair(7, COLOR_BLUE, COLOR_BLACK);
+		}
 	}
 	init_pair(3, COLOR_YELLOW, COLOR_YELLOW);  // UNDERGROUND COLORS
 	init_pair(4, COLOR_BLACK, COLOR_WHITE);	// LOGO COLORS
 	init_pair(5, COLOR_WHITE, COLOR_RED);	  // GAME OVER COLORS
 	init_pair(6, COLOR_WHITE,
 			  COLOR_GREEN);  // GET READY AND GROUND BORDER COLORS
-	init_pair(7, COLOR_BLACK, COLOR_GREEN);  // PIPE BORDER COLORS
 
 	getmaxyx(stdscr, row, col);
 
@@ -240,23 +254,63 @@ void writeInfo(int row, int col) {
 	              |_|   |_|    |___/
 	*/
 	attron(A_BOLD | COLOR_PAIR(4));
-	mvprintw(row / 2 - 10, (col - 50) / 2,
+	mvprintw(row / 2 - 14, (col - 50) / 2,
 			 " _____ _                         ____  _         _ ");
-	mvprintw(row / 2 - 9, (col - 50) / 2,
+	mvprintw(row / 2 - 13, (col - 50) / 2,
 			 "|  ___| | __ _ _ __  _ __  _   _| __ )(_)_ __ __| |");
-	mvprintw(row / 2 - 8, (col - 50) / 2,
+	mvprintw(row / 2 - 12, (col - 50) / 2,
 			 "| |_  | |/ _` | '_ \\| '_ \\| | | |  _ \\| | '__/ _` |");
-	mvprintw(row / 2 - 7, (col - 50) / 2,
+	mvprintw(row / 2 - 11, (col - 50) / 2,
 			 "|  _| | | (_| | |_) | |_) | |_| | |_) | | | | (_| |");
-	mvprintw(row / 2 - 6, (col - 50) / 2,
+	mvprintw(row / 2 - 10, (col - 50) / 2,
 			 "|_|   |_|\\__,_| .__/| .__/ \\__, |____/|_|_|  \\__,_|");
-	mvprintw(row / 2 - 5, (col - 50) / 2,
+	mvprintw(row / 2 - 9, (col - 50) / 2,
 			 "              |_|   |_|    |___/                   ");
 	attroff(A_BOLD | COLOR_PAIR(4));
-	mvprintw(row / 2 - 1, (col - 62) / 2,
+	/*
+	            [][][][][][]          
+            [][]      []    []        
+          []        []        []      
+	  [][][][]      []      []  []    
+	[]        []    []      []  []    
+	[]          []    []        []    
+	[]          []      [][][][][][]  
+	  []      []      []            []
+	    [][][]      []  [][][][][][]  
+	    []            []          []  
+	      [][]          [][][][][]    
+	          [][][][][]              
+	*/
+	attron(COLOR_PAIR(7));
+	mvprintw(row / 2 - 7, (col - 34) / 2,
+			 "            [][][][][][]          ");
+	mvprintw(row / 2 - 6, (col - 34) / 2,
+			 "        [][]      []    []        ");
+	mvprintw(row / 2 - 5, (col - 34) / 2,
+			 "      []        []        []      ");
+	mvprintw(row / 2 - 4, (col - 34) / 2,
+			 "  [][][][]      []      []  []    ");
+	mvprintw(row / 2 - 3, (col - 34) / 2,
+			 "[]        []    []      []  []    ");
+	mvprintw(row / 2 - 2, (col - 34) / 2,
+			 "[]          []    []        []    ");
+	mvprintw(row / 2 - 1, (col - 34) / 2,
+			 "[]          []      [][][][][][]  ");
+	mvprintw(row / 2, (col - 34) / 2,
+			 "  []      []      []            []");
+	mvprintw(row / 2 + 1, (col - 34) / 2,
+			 "    [][][]      []  [][][][][][]  ");
+	mvprintw(row / 2 + 2, (col - 34) / 2,
+			 "    []            []          []  ");
+	mvprintw(row / 2 + 3, (col - 34) / 2,
+			 "      [][]          [][][][][]    ");
+	mvprintw(row / 2 + 4, (col - 34) / 2,
+			 "          [][][][][]              ");
+	attroff(COLOR_PAIR(7));
+	mvprintw(row / 2 + 6, (col - 62) / 2,
 			 "If you touch the ground or any of the pipes, game will be over");
-	mvprintw(row / 2 + 1, (col - 27) / 2, "Use \"SPACE BAR\" for playing");
-	mvprintw(row / 2 + 5, (col - 27) / 2, "Before, Enter Your Name >> ");
+	mvprintw(row / 2 + 8, (col - 27) / 2, "Use \"SPACE BAR\" for playing");
+	mvprintw(row / 2 + 12, (col - 27) / 2, "Before, Enter Your Name >> ");
 }
 
 int controlCollision(int pipeCol, int birdCol, int birdRow, int crackStart,
@@ -277,32 +331,24 @@ int controlCollision(int pipeCol, int birdCol, int birdRow, int crackStart,
 }
 
 void drawPipe(int begin, int end, int pipeCol, int row) {
-	for (int i = 2; i < row - 3; i++) {
+	for (int i = 0; i < row - 3; i++) {
 		if (i < begin) {
 			if (i == begin - 1 || i == begin - 2) {
-				mvprintw(i, pipeCol - 9, " ######## ");
+				mvprintw(i, pipeCol - 9, "          ");
 			} else if (i == begin - 3) {
-				attroff(COLOR_PAIR(1));
-				attron(COLOR_PAIR(7));
 				mvprintw(i, pipeCol - 8, "________");
-				attroff(COLOR_PAIR(7));
-				attron(COLOR_PAIR(1));
 			} else{
 				//                       9876543210
-				mvprintw(i, pipeCol - 8, "########");
+				mvprintw(i, pipeCol - 8, "        ");
 			}
 		}
 		if (i > end) {
 			if (i == end + 1) {
-				mvprintw(i, pipeCol - 9, " ######## ");
+				mvprintw(i, pipeCol - 9, "          ");
 			} else if (i == end + 2) {
-				attroff(COLOR_PAIR(1));
-				attron(COLOR_PAIR(7));
 				mvprintw(i, pipeCol - 9, " ________ ");
-				attroff(COLOR_PAIR(7));
-				attron(COLOR_PAIR(1));
 			} else {
-				mvprintw(i, pipeCol - 8, "########");
+				mvprintw(i, pipeCol - 8, "        ");
 			}
 		}
 	}
